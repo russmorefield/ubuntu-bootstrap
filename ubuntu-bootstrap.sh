@@ -17,7 +17,7 @@
 #   - Running a system discovery report.
 #
 # Author: RLMX Tech/Gemini
-# Version: 1.5
+# Version: 1.6
 # ==============================================================================
 
 # --- Helper Functions & Colors ---
@@ -45,7 +45,7 @@ secure_user_and_harden_ssh() {
     echo -e "${CYAN}--- Starting Secure User Setup and SSH Hardening ---${NC}"
 
     # --- User Input ---
-    read -r -p "Enter the username for the new sudo user: " NEW_USER
+    read -r -p "Enter the username for the new sudo user: " NEW_USER < /dev/tty
     if [ -z "$NEW_USER" ]; then
         echo -e "${RED}Error: No username entered. Exiting.${NC}" >&2
         exit 1
@@ -55,7 +55,7 @@ secure_user_and_harden_ssh() {
         exit 1
     fi
 
-    read -r -p "Enter the GitHub username to fetch the SSH public key from: " GITHUB_USER
+    read -r -p "Enter the GitHub username to fetch the SSH public key from: " GITHUB_USER < /dev/tty
     if [ -z "$GITHUB_USER" ]; then
         echo -e "${RED}Error: No GitHub username entered. Exiting.${NC}" >&2
         exit 1
@@ -206,7 +206,7 @@ uninstall_oh_my_posh() {
     # Ask to remove font
     FONT_DIR="/usr/local/share/fonts/cascadia"
     if [ -d "$FONT_DIR" ]; then
-        read -r -p "Do you want to uninstall the Caskaydia Cove Nerd Font? (y/N) " -n 1
+        read -r -p "Do you want to uninstall the Caskaydia Cove Nerd Font? (y/N) " -n 1 < /dev/tty
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             rm -rf "$FONT_DIR"
@@ -294,7 +294,8 @@ main_menu() {
         echo "5. Run System Discovery"
         echo "6. Exit"
         echo ""
-        read -r -p "Enter your choice [1-6]: " choice
+        # Read directly from the terminal, not from the stdin pipe
+        read -r -p "Enter your choice [1-6]: " choice < /dev/tty
 
         case $choice in
             1)
@@ -333,7 +334,18 @@ echo -e "${CYAN}System discovery complete. Proceeding to main menu...${NC}"
 main_menu
 
 # --- End of Script ---
+echo -e "${YELLOW}----------------------------------------------------${NC}"
+echo -e "${GREEN}Thank you for using the Ubuntu Bootstrap Script!${NC}"
+echo -e "${YELLOW}----------------------------------------------------${NC}"
+# Exit with success status
+exit 0
+# End of ubuntu-bootstrap.sh
+# ==============================================================================
 # This script is designed to be run on a fresh Ubuntu server installation.
-# It combines multiple setup, hardening, and utility scripts into a single, menu-driven tool.
-# Ensure you have the necessary permissions and dependencies installed before running this script.
-# For any issues or contributions, please refer to the repository on GitHub.
+# It will not work correctly if run on a system that has already been configured.
+# Please ensure you have a backup of your system before running this script.
+# Use at your own risk.
+# ==============================================================================
+# Note: This script is intended for educational purposes and should be tested in a safe environment before
+# deployment in production systems. Always review scripts before running them on your system.
+# ==============================================================================
