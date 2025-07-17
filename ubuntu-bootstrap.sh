@@ -17,7 +17,7 @@
 #   - Running a system discovery report.
 #
 # Author: RLMX Tech/Gemini
-# Version: 1.4
+# Version: 1.5
 # ==============================================================================
 
 # --- Helper Functions & Colors ---
@@ -284,42 +284,43 @@ system_discovery() {
 
 # --- Main Menu ---
 main_menu() {
-    echo -e "\n${YELLOW}--- Ubuntu Bootstrap Script Menu ---${NC}"
-    echo "Please choose an option:"
-    echo "1. Initial Server Setup (Create Sudo User & Harden SSH)"
-    echo "2. Install Oh My Posh"
-    echo "3. Uninstall Oh My Posh"
-    echo "4. Install Docker"
-    echo "5. Run System Discovery"
-    echo "6. Exit"
-    echo ""
-    read -r -p "Enter your choice [1-6]: " choice
+    while true; do
+        echo -e "\n${YELLOW}--- Ubuntu Bootstrap Script Menu ---${NC}"
+        echo "Please choose an option:"
+        echo "1. Initial Server Setup (Create Sudo User & Harden SSH)"
+        echo "2. Install Oh My Posh"
+        echo "3. Uninstall Oh My Posh"
+        echo "4. Install Docker"
+        echo "5. Run System Discovery"
+        echo "6. Exit"
+        echo ""
+        read -r -p "Enter your choice [1-6]: " choice
 
-    case $choice in
-        1)
-            secure_user_and_harden_ssh
-            ;;
-        2)
-            install_oh_my_posh
-            ;;
-        3)
-            uninstall_oh_my_posh
-            ;;
-        4)
-            install_docker
-            ;;
-        5)
-            system_discovery
-            ;;
-        6)
-            echo "Exiting."
-            exit 0
-            ;;
-        *)
-            echo -e "${RED}Invalid option. Please try again.${NC}"
-            main_menu
-            ;;
-    esac
+        case $choice in
+            1)
+                secure_user_and_harden_ssh
+                ;;
+            2)
+                install_oh_my_posh
+                ;;
+            3)
+                uninstall_oh_my_posh
+                ;;
+            4)
+                install_docker
+                ;;
+            5)
+                system_discovery
+                ;;
+            6)
+                echo "Exiting."
+                exit 0
+                ;;
+            *)
+                echo -e "${RED}Invalid option. Please try again.${NC}"
+                ;;
+        esac
+    done
 }
 
 # --- Script Entry Point ---
@@ -332,5 +333,7 @@ echo -e "${CYAN}System discovery complete. Proceeding to main menu...${NC}"
 main_menu
 
 # --- End of Script ---
-echo -e "${YELLOW}----------------------------------------------------${NC}"
-echo -e "${GREEN}Thank you for using the Ubuntu Bootstrap Script!${NC}"
+# This script is designed to be run on a fresh Ubuntu server installation.
+# It combines multiple setup, hardening, and utility scripts into a single, menu-driven tool.
+# Ensure you have the necessary permissions and dependencies installed before running this script.
+# For any issues or contributions, please refer to the repository on GitHub.
