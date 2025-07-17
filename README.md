@@ -1,5 +1,8 @@
 # Ubuntu Bootstrap Master Script
 
+> [!CAUTION]
+> This project is currently under development
+
 This repository contains a comprehensive master script, `ubuntu-bootstrap.sh`, designed to automate the initial setup and configuration of a new Ubuntu server. It consolidates several common administrative tasks into a single, interactive, menu-driven utility.
 
 The primary goal of this script is to create a secure, modern, and developer-friendly environment quickly and consistently across multiple machines.
