@@ -17,7 +17,7 @@
 #   - Running a system discovery report.
 #
 # Author: RLMX Tech/Gemini
-# Version: 1.3
+# Version: 1.4
 # ==============================================================================
 
 # --- Helper Functions & Colors ---
@@ -45,7 +45,7 @@ secure_user_and_harden_ssh() {
     echo -e "${CYAN}--- Starting Secure User Setup and SSH Hardening ---${NC}"
 
     # --- User Input ---
-    read -p "Enter the username for the new sudo user: " NEW_USER
+    read -r -p "Enter the username for the new sudo user: " NEW_USER
     if [ -z "$NEW_USER" ]; then
         echo -e "${RED}Error: No username entered. Exiting.${NC}" >&2
         exit 1
@@ -55,7 +55,7 @@ secure_user_and_harden_ssh() {
         exit 1
     fi
 
-    read -p "Enter the GitHub username to fetch the SSH public key from: " GITHUB_USER
+    read -r -p "Enter the GitHub username to fetch the SSH public key from: " GITHUB_USER
     if [ -z "$GITHUB_USER" ]; then
         echo -e "${RED}Error: No GitHub username entered. Exiting.${NC}" >&2
         exit 1
@@ -206,7 +206,7 @@ uninstall_oh_my_posh() {
     # Ask to remove font
     FONT_DIR="/usr/local/share/fonts/cascadia"
     if [ -d "$FONT_DIR" ]; then
-        read -p "Do you want to uninstall the Caskaydia Cove Nerd Font? (y/N) " -n 1 -r
+        read -r -p "Do you want to uninstall the Caskaydia Cove Nerd Font? (y/N) " -n 1
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             rm -rf "$FONT_DIR"
@@ -234,6 +234,7 @@ install_docker() {
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     chmod a+r /etc/apt/keyrings/docker.gpg
 
+    # shellcheck disable=SC1091
     echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
       $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
@@ -292,7 +293,7 @@ main_menu() {
     echo "5. Run System Discovery"
     echo "6. Exit"
     echo ""
-    read -p "Enter your choice [1-6]: " choice
+    read -r -p "Enter your choice [1-6]: " choice
 
     case $choice in
         1)
@@ -330,3 +331,6 @@ echo -e "${CYAN}System discovery complete. Proceeding to main menu...${NC}"
 
 main_menu
 
+# --- End of Script ---
+echo -e "${YELLOW}----------------------------------------------------${NC}"
+echo -e "${GREEN}Thank you for using the Ubuntu Bootstrap Script!${NC}"
