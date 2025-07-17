@@ -51,7 +51,7 @@ To execute the script, run the following one-line command. This will download th
 > Replace `YourUsername` with your actual GitHub username.
 
 ```bash
-curl -sL "[https://raw.githubusercontent.com/russmorefield/ubuntu-bootstrap/main/ubuntu-bootstrap.sh](https://raw.githubusercontent.com/russmorefield/ubuntu-bootstrap/main/ubuntu-bootstrap.sh)" | sudo bash
+curl -sL "https://raw.githubusercontent.com/russmorefield/ubuntu-bootstrap/main/ubuntu-bootstrap.sh" | sudo bash
 ```
 
 ---
