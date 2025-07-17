@@ -1,0 +1,26 @@
+# GitHub Action for ShellCheck
+#
+# This workflow automatically runs the ShellCheck linter on all shell scripts
+# in the repository every time a change is pushed to the 'main' branch.
+# This helps catch common bugs and syntax errors.
+
+name: ShellCheck Linter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shellcheck:
+    name: Run ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './'

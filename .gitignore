@@ -1,0 +1,11 @@
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+*.swp
+*.swo
+
+# Local environment files
+.env
